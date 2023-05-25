@@ -5,59 +5,41 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Page2(title: 'Flutter Demo Home Page'),
+      home: Page2(
+        title: 'Flutter Demo Home Page',
+        praticien: {},
+      ),
     );
   }
 }
 
 class Page2 extends StatefulWidget {
-  const Page2({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
+  final Map<String, dynamic> praticien;
   final String title;
 
+  const Page2({Key? key, required this.praticien, required this.title});
+
   @override
-  State<Page2> createState() => _MyHomePageState();
+  State<Page2> createState() => _Page2State();
 }
 
-class _MyHomePageState extends State<Page2> {
+class _Page2State extends State<Page2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: Center(
         child: Card(
           elevation: 50,
@@ -71,101 +53,77 @@ class _MyHomePageState extends State<Page2> {
               child: Column(
                 children: [
                   Text(
-                    'Details du praticien',
+                    'Détails du praticien',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Nom :   Noa'),
-                  Text('Prenom :   Noa'),
-                  Text('Adresse :   Pont'),
-                  Text('Ville :   Saint-Amand-Les-Eaux'),
-                  Text('Code Postal :   59230'),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  const Text.rich(
+                  SizedBox(height: 10),
+                  Text('Nom : ${widget.praticien['Nom']}'),
+                  Text('Prenom : ${widget.praticien['Prenom']}'),
+                  Text('Adresse : ${widget.praticien['Adresse']}'),
+                  Text('Ville : ${widget.praticien['Ville']}'),
+                  Text('Code Postal : ${widget.praticien['CodePostal']}'),
+                  SizedBox(height: 10),
+                  Text.rich(
                     TextSpan(
-                      text: 'Note Expert', // default text style
+                      text: 'Note Expert - ',
                       children: <TextSpan>[
                         TextSpan(
-                          text: ' - ',
+                          text: '${widget.praticien['noteExpert']}',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        TextSpan(
-                            text: ' 8/10 ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Container(
                       padding: EdgeInsets.all(20),
                       color: Color.fromARGB(255, 179, 177, 177),
-                      child: const Text.rich(
+                      child: Text.rich(
                         TextSpan(
-                          text: 'Commentaire', // default text style
+                          text: 'Commentaire : ',
                           children: <TextSpan>[
                             TextSpan(
-                              text: ' : ',
-                            ),
-                            TextSpan(
-                              text:
-                                  ' jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj ',
+                              text: '${widget.praticien['commentaireExpert']}',
                             ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  const Text.rich(
+                  SizedBox(height: 10),
+                  Text.rich(
                     TextSpan(
-                      text: 'Note Client', // default text style
+                      text: 'Note Client - ',
                       children: <TextSpan>[
                         TextSpan(
-                          text: ' - ',
+                          text: '${widget.praticien['noteClient']}',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        TextSpan(
-                            text: ' 7/10 ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   Container(
                     padding: EdgeInsets.all(20),
                     color: Color.fromARGB(255, 179, 177, 177),
-                    child: const Text.rich(
+                    child: Text.rich(
                       TextSpan(
-                        text: 'Commentaire', // default text style
+                        text: 'Commentaire : ',
                         children: <TextSpan>[
                           TextSpan(
-                            text: ' : ',
-                          ),
-                          TextSpan(
-                            text:
-                                ' jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj ',
+                            text: '${widget.praticien['commentaireClient']}',
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: 20),
                   TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 7, 7, 7),
@@ -177,7 +135,7 @@ class _MyHomePageState extends State<Page2> {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      "Revenir sur la liste des praticiens",
+                      'Revenir sur la liste des praticiens',
                       style: TextStyle(
                         color: Color(0xffffffff),
                       ),
@@ -185,10 +143,10 @@ class _MyHomePageState extends State<Page2> {
                   ),
                 ],
               ),
-            ), //Column
-          ), //Padding
-        ), //SizedBox
-      ), //Card
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
