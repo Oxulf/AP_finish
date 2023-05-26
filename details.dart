@@ -61,50 +61,23 @@ class _Page2State extends State<Page2> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text('Nom : ${widget.praticien['Nom']}'),
-                  Text('Prenom : ${widget.praticien['Prenom']}'),
-                  Text('Adresse : ${widget.praticien['Adresse']}'),
-                  Text('Ville : ${widget.praticien['Ville']}'),
-                  Text('Code Postal : ${widget.praticien['CodePostal']}'),
+                  Text('Nom : ${widget.praticien['nom']}'),
+                  Text('Prenom : ${widget.praticien['prenom']}'),
+                  Text('Adresse : ${widget.praticien['adresse']}'),
+                  Text('Ville : ${widget.praticien['nom_ville']}'),
+                  Text(
+                      'Code Postal : ${widget.praticien['code_postal_ville']}'),
                   SizedBox(height: 10),
-                  Text.rich(
-                    TextSpan(
-                      text: 'Note Expert - ',
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '${widget.praticien['noteExpert']}',
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Note Expert - ${widget.praticien['note_expert']}',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      color: Color.fromARGB(255, 179, 177, 177),
-                      child: Text.rich(
-                        TextSpan(
-                          text: 'Commentaire : ',
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: '${widget.praticien['commentaireExpert']}',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text.rich(
-                    TextSpan(
-                      text: 'Note Client - ',
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '${widget.praticien['noteClient']}',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                        SizedBox(width: 4),
+                        Icon(Icons.star, color: Colors.yellow, size: 16),
                       ],
                     ),
                   ),
@@ -114,10 +87,39 @@ class _Page2State extends State<Page2> {
                     color: Color.fromARGB(255, 179, 177, 177),
                     child: Text.rich(
                       TextSpan(
-                        text: 'Commentaire : ',
+                        text: 'Commentaire : \n\n',
                         children: <TextSpan>[
                           TextSpan(
-                            text: '${widget.praticien['commentaireClient']}',
+                            text: '${widget.praticien['commentaire_expert']}',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Notes des Clients - ${widget.praticien['note_total_client']}',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 4),
+                        Icon(Icons.star, color: Colors.yellow, size: 16),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    color: Color.fromARGB(255, 179, 177, 177),
+                    child: Text.rich(
+                      TextSpan(
+                        text: 'Commentaire : \n\n',
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: '${widget.praticien['commentaires_client']}',
                           ),
                         ],
                       ),

@@ -69,7 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> fetchData() async {
     var connection = await getConnection();
 
-    var results = await connection.query('SELECT * FROM client');
+    var results = await connection.query(
+        'SELECT praticien.*, ville.nom AS nom_ville, ville.code_postal AS code_postal_ville, notes.NoteTotalClient AS note_total_client, notes.NoteExpert AS note_expert, notes.NoteTotaux AS note_totaux, (SELECT GROUP_CONCAT(relation_praticiens_client.Commentaire SEPARATOR "\n\n") FROM relation_praticiens_client INNER JOIN client ON relation_praticiens_client.IdClient = client.id_client WHERE relation_praticiens_client.IdPraticiens = praticien.id) AS commentaires_client, (SELECT GROUP_CONCAT(equipe_expert.Commentaire SEPARATOR "\n\n") FROM equipe_expert WHERE equipe_expert.IdPraticien = praticien.id) AS commentaire_expert FROM praticien INNER JOIN ville ON praticien.id_ville = ville.id INNER JOIN departement ON ville.id_departement = departement.id INNER JOIN region ON departement.id_region = region.id LEFT JOIN notes ON praticien.id = notes.idPraticiens WHERE region.nom LIKE "%ALPES%" LIMIT 10; ');
 
     setState(() {
       praticiens = results.map((row) => row.fields).toList();
@@ -116,8 +117,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       itemBuilder: (context, index) {
                         var praticien = praticiens[index];
                         return ListTile(
-                          title: Text(praticien['Nom'].toString()),
-                          subtitle: Text(praticien['Prenom'].toString()),
+                          title: Text(praticien['nom'].toString()),
+                          subtitle: Row(
+                            children: [
+                              Text(praticien['note_totaux'].toString()),
+                              Icon(Icons.star),
+                            ],
+                          ),
                           trailing: Icon(Icons.touch_app),
                           tileColor: const Color.fromARGB(255, 220, 201, 201),
                           onTap: () {
