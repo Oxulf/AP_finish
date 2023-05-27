@@ -116,7 +116,7 @@ class _Page2State extends State<Page2> {
                     color: Color.fromARGB(255, 179, 177, 177),
                     child: Text.rich(
                       TextSpan(
-                        text: 'Commentaire : \n\n',
+                        text: 'Commentaire : ',
                         children: <TextSpan>[
                           TextSpan(
                             text: '${widget.praticien['commentaires_client']}',

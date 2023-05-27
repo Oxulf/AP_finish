@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       routes: {
-        '': (context) => MyHomePage(title: "Connexion"),
+        '': (context) => MyHomePage(title: "Première page"),
         '/secondPage': (context) => Page2(
-              praticien: {}, // Remplacez les accolades par les données appropriées
+              praticien: {},
               title: "Deuxième page",
             ),
       },
